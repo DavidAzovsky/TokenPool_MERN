@@ -51,8 +51,8 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const Deposit = mongoose.model("Deposit", depositSchema);
-const Withdrawal = mongoose.model("Withdrawal", withdrawSchema);
+export const Deposit = mongoose.model("Deposit", depositSchema);
+export const Withdrawal = mongoose.model("Withdrawal", withdrawSchema);
 
 export const getData = () => {
   apolloClient
