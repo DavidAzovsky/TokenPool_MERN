@@ -29,7 +29,7 @@ const query = `
   query {
     deposits (where: { depositTime_gte: ${
       Math.floor(Date.now() / 1000) - 86400
-    } }) {
+    } }){
       from
       amount
       compound
@@ -60,20 +60,27 @@ export const getData = () => {
       query: gql(query),
     })
     .then((data) => {
-      console.log("Subgraph data:", data.data);
-
       const subgraphData = data.data;
       const depositData = subgraphData.deposits;
       const withdrawData = subgraphData.withdrawals;
 
       depositData.forEach((deposit: any) => {
-        const _deposit = new Deposit(deposit);
-        _deposit.save();
+        const _deposit = deposit;
+        const _depositTime = parseInt(_deposit.depositTime);
+        const _depositDate = new Date(_depositTime * 1000);
+
+        const _depositSchema = new Deposit(deposit);
+        _depositSchema.depositTime = _depositDate;
+        _depositSchema.save();
       });
 
       withdrawData.forEach((withdrawal: any) => {
-        const _withdraw = new Withdrawal(withdrawal);
-        _withdraw.save();
+        const _withdraw = withdrawal;
+        const _withdrawTime = parseInt(_withdraw.withdrawTime);
+        const _withdrawDate = new Date(_withdrawTime * 1000);
+        const _withdrawSchema = new Withdrawal(withdrawal);
+        _withdrawSchema.withdrawTime = _withdrawDate;
+        _withdrawSchema.save();
       });
     })
     .catch((err) => {

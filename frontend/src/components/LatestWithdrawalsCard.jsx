@@ -19,7 +19,7 @@ function LatestWithdrawalsCard(props) {
                         setFetch({
                             sender: response.data.doc.from,
                             traded: response.data.doc.amount,
-                            date: response.data.doc.withdrawalTime
+                            date: response.data.doc.withdrawTime
                         });
                     } else {
                         setEmpty(true);
