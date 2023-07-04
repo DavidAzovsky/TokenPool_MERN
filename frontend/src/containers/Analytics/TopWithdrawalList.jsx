@@ -64,7 +64,7 @@ function TopWithdrawalList(...props) {
                         </TableCell>
                         <TableCell align="left">{row.amount}</TableCell>
                         <TableCell align="left">
-                            {row.withdrawalTime.substring(0, 10) + ' ' + row.withdrawalTime.substring(11, 19)}
+                            {row.withdrawTime.substring(0, 10) + ' ' + row.withdrawTime.substring(11, 19)}
                         </TableCell>
                         </TableRow>
                     ))}

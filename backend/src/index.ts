@@ -130,7 +130,6 @@ app.post("/latestWithdrawal", (req: Request, res: Response): any => {
     .then((doc: any) => {
       if (doc == null) return res.status(200).send({ success: false });
       else {
-        console.log(doc);
         return res.status(200).send({
           success: true,
           doc,
@@ -144,9 +143,9 @@ const PORT = 3000;
 try {
   app.listen(PORT, (): void => {
     console.log(`Connected successfully on port ${PORT}`);
-    cron.schedule(`0 0 * * *`, () => {
-      getData();
-    });
+    // cron.schedule(`0 0 * * *`, () => {
+    getData();
+    // });
   });
 } catch (error: any) {
   console.error(`Error ocurred: ${error.message}`);
