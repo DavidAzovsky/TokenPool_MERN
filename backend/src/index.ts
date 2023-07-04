@@ -45,13 +45,13 @@ app.get("/withdrawal", (req: Request, res: Response): any => {
   Withdrawal.aggregate([
     {
       $sort: {
-        withdrawalTime: -1,
+        withdrawTime: -1,
       },
     },
     {
       $addFields: {
-        week: { $week: "$withdrawalTime" },
-        year: { $year: "$withdrawalTime" },
+        week: { $week: "$withdrawTime" },
+        year: { $year: "$withdrawTime" },
       },
     },
     {
@@ -143,9 +143,9 @@ const PORT = 3000;
 try {
   app.listen(PORT, (): void => {
     console.log(`Connected successfully on port ${PORT}`);
-    // cron.schedule(`0 0 * * *`, () => {
-    getData();
-    // });
+    cron.schedule(`0 0 * * *`, () => {
+      getData();
+    });
   });
 } catch (error: any) {
   console.error(`Error ocurred: ${error.message}`);
